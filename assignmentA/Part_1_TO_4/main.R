@@ -1,8 +1,6 @@
 #Author: DHAVAL NITINKUMAR SHAH(STUDENT ID: 1535740)
 #Date: 24-MARCH-2020
 
-setwd("F:/Unitec/Sem1/Introduction_To_Data_Science/RScripts/assignment1")
-
 source(polutantmean.R)
 source(complete.R)
 source(corr.R)
