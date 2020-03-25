@@ -81,6 +81,6 @@ summary(output5)
 ##  -0.21057 -0.04999  0.09463  0.12525  0.26844  0.76313 
 
 output6 <- pollutantvector("specdata", "sulfate", 1:35, 0.5)
-write.csv(output, file = "output6.csv", row.names = T)
+write.csv(output6, file = "output6.csv", row.names = T)
 #OUTPUT:
 ## Check output6.csv for output
