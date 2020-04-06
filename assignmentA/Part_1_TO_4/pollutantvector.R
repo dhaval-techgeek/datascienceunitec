@@ -1,25 +1,35 @@
 #Author: DHAVAL NITINKUMAR SHAH(STUDENT ID: 1535740)
 #Date: 24-MARCH-2020
+#Revised: 06-APRIL-2020
 
-pollutantvector <- function(directory, pollutant, id = 1:332, p) {
-  directory <- paste(getwd(),"/","specdata","/",sep="")
+pollutantvector <- function(directory, pollutant, id, p) {
+  # Get full path of the specdata folder
+  path <- paste(getwd(), "/", directory, "/", sep = "")
+  files <- list.files(path)
   
-  file_list <- list.files(directory)
-  resultVec <- vector()
+  #create empty vector
+  #vector_res <- vector(mode = "numeric", length = 0)
+  vector_res <- vector()
   
-  for(index in id) {
-    # Read the file,
-    file_dir <- paste(directory,file_list[index],sep="")
+  for (i in id) {
+    #Read the file
+    file_dir <- paste(path, files[i], sep = "")
     file_data <- read.csv(file_dir)
-    
-    # extract valid value to a vector
-    validDataList <- apply(file_data[`pollutant`], 1, function(x) (!is.na(x)&&(x > p)))
-    validData <- file_data[validDataList,]
-    
-    # append valid data into result data frame
-    resultVec <- rbind(resultVec, validData)
+
+    #Find all the records that have NOT NULL 'sulfate' AND 'nitrate' values
+    interested_data <- file_data[pollutant]
+    final_data <- interested_data[!is.na(interested_data)]
+
+    for(j in 1:length(final_data))
+    {
+      #Extract data of nitrate and sulfate
+      if (final_data[j] > p) {
+        vector_res <- c(vector_res, final_data[j])
+      }
+    }
     
   }
   
-  return(resultVec)
+  return(vector_res)
+  
 }
